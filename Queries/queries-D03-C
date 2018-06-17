@@ -1,0 +1,111 @@
+Query C/1
+The average, the minimum, the maximum, and the standard deviation of the number of applications per trip.
+
+select 
+avg(t.requests.size), 
+min(t.requests.size), 
+max(t.requests.size), 
+sqrt(sum(t.requests.size * t.requests.size) /
+count(t.requests.size) - (avg(t.requests.size) * avg(t.requests.size))) 
+from Trip t;
+
+
+Esta query necesita del tamaño de las listas de requests por cada trip, por eso la media, el mínimo, el máximo y la desviación típica se hacen sobre t.requests.size.
+
+Query C/2
+The average, the minimum, the maximum, and the standard deviation of the number of trips managed per manager.
+
+select avg(m.trips.size),
+min(m.trips.size),
+max(m.trips.size),
+sqrt(sum(m.trips.size *m.trips.size) / count(m.trips.size) - (avg(m.trips.size) * avg(m.trips.size))) 
+from Manager m;
+
+
+Esta query necesita del tamaño de las listas de trips por cada manager, por eso la media, el mínimo, el máximo y la desviación típica se hacen sobre m.trips.size.
+
+
+
+
+
+Query C/3
+The average, the minimum, the maximum, and the standard deviation of the price of the trips.  
+
+price es @Transient y por eso no se pude usar en una query ???
+
+select avg(t.price),
+min(t.price),
+max(t.price),
+sqrt(sum(t.price *t.price) / count(t.price) - (avg(t.price) * avg(t.price))) from Trip t;
+
+Esta query muestra la media del precio(t.price), el mínimo, el máximo y la desviación típica.
+
+Query C/4
+The average, the minimum, the maximum, and the standard deviation of the number trips guided per ranger.
+
+select avg(r.trips.size),
+min(r.trips.size),
+max(r.trips.size),
+sqrt(sum(r.trips.size *r.trips.size) / count(r.trips.size) - (avg(r.trips.size) * avg(r.trips.size))) from Ranger r;
+
+Esta query necesita del tamaño de las listas de trips por cada ranger, por eso la media, el mínimo, el máximo y la desviación típica se hacen sobre r.trips.size.
+
+
+Query C/5
+The ratio of applications with status 'PENDING'.
+
+select count(req)/count(r) 
+from Request r, Request req where req.status='PENDING';
+
+Esta query cuenta el número total de applications y el número de ellas que tienen el estado 'PENDING', muestra el total dividido entre las que tienen dicho estado.
+
+
+
+Query C/6
+The ratio of applications with status 'DUE'.
+
+select count(req)/count(r) 
+from Request r, Request req where req.status='DUE';
+
+Esta query cuenta el número total de applications y el número de ellas que tienen el estado 'PENDING', muestra el total dividido entre las que tienen dicho estado.
+
+Query C/7
+The ratio of applications with status 'ACCEPTED'.
+
+select count(req)/count(r) 
+from Request r, Request req where req.status='ACCEPTED';
+
+Esta query cuenta el número total de applications y el número de ellas que tienen el estado 'ACCEPTED', muestra el total dividido entre las que tienen dicho estado.
+
+Query C/8
+The ratio of applications with status 'CANCELLED'.
+
+select count(req)/count(r) 
+from Request r, Request req where req.status='CANCELLED';
+
+Esta query cuenta el número total de applications y el número de ellas que tienen el estado 'CANCELLED', muestra el total dividido entre las que tienen dicho estado.
+
+Query C/9
+The ratio of trips that have been cancelled versus the total number of trips that have been organised.
+
+select count(tr)/count(t) 
+from Trip tr ,Trip t where tr.cancelled =TRUE;
+
+Esta query cuenta el número total de trips y el número de ellos que se han cancelado, muestra el total dividido entre las canceladas.
+
+
+Query C/10
+The listing of trips that have got at least 10 % more applications than the average, ordered by number of applications.
+
+select t from Trip t group by t having t.requests.size*1.1 > avg(t.requests.size) order by t.requests.size;
+
+Esta query toma los trips que tengan un 10% más de applications (de ahí el *1.1) que la media.
+
+Query C/11
+A table with the number of times that each legal text’s been referenced.
+
+select l,l.trips.size from LegalText l;
+
+Esta query muestra cada LegalText con el tamaño de la lista de Trips que tienen asignado.
+
+

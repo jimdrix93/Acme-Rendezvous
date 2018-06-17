@@ -1,0 +1,31 @@
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+
+	<definition name="answer/list" extends="master.page">	
+		<put-attribute name="title" value="Answers list" />
+		<put-attribute name="body" value="/views/answer/list.jsp" />
+	</definition>
+	
+	<definition name="answer/user/create" extends="master.page">	
+		<put-attribute name="title" value="Answer question" />
+		<put-attribute name="body" value="/views/answer/create.jsp" />
+	</definition>
+	
+	<definition name="answer/user/edit" extends="master.page">	
+		<put-attribute name="title" value="Please, answer this questions first" />
+		<put-attribute name="body" value="/views/answer/edit.jsp" />
+	</definition>
+	
+	<definition name="/answer/user/fail" extends="master.page">	
+		<put-attribute name="title" value="Reservation not completed. Please, answer the asociated questions first" />
+		<put-attribute name="body" value="/views/answer/fail.jsp" />
+	</definition>
+	
+	
+	
+	
+	
+</tiles-definitions>
